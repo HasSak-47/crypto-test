@@ -1,17 +1,17 @@
 @import 'tailwindcss';
 
 @theme {
-    --color-1: #ffffff;
-    --color-2: #bbbbbb;
-    --color-3: #888888;
-    --color-4: #444444;
-    --color-5: #000000;
+    --color-1: #dad4cf;
+    --color-2: #b6877c;
+    --color-3: #914c55;
+    --color-4: #62274a;
+    --color-5: #311248;
     --font-mono: 'Fira Code', monospace;
 }
 
 @layer components {
     .form-container {
-        @apply bg-5 text-1 w-full max-w-xl rounded-xl p-6 shadow-md;
+        @apply bg-4 text-1 mx-auto mt-10 max-w-xl rounded-xl p-6 shadow-md;
     }
 
     .form-label {
@@ -19,6 +19,6 @@
     }
 
     .form-input {
-        @apply bg-4 text-1 w-full rounded-md border border-3 p-2 focus:ring-2 focus:outline-none;
+        @apply bg-3 text-1 w-full cursor-copy rounded-md border border-3 p-2 focus:ring-2 focus:outline-none;
     }
 }
