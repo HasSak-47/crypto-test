@@ -143,16 +143,32 @@ function force_alpha(val: string) {
 	return changed
 }
 
+function force_number(val: string) {
+	let changed = ''
+	for (const letter of val) {
+		if ('0' <= letter && letter <= '9') changed += letter
+	}
+
+	return changed
+}
+
 const forceChar: Validator<string> = (e, set) => {
 	e.preventDefault()
-	set(force_alpha(e.target.value))
+	e.target.value = force_alpha(e.target.value)
+	set(e.target.value)
 }
 
 const forceNumber: Validator<number> = (e, set) => {
 	e.preventDefault()
-	let new_val = parseInt(e.target.value)
-	if (isNaN(new_val)) set(0)
-	else set(new_val)
+	let val = force_number(e.target.value)
+	let new_val = parseInt(val)
+	if (isNaN(new_val)) {
+		e.target.value = '0'
+		set(0)
+	} else {
+		e.target.value = val
+		set(new_val)
+	}
 }
 
 export default function App() {

@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
 @theme {
-    --color-base-1: #e0fbfc;
-    --color-base-2: #98c1d9;
-    --color-base-3: #ee6c4d;
-    --color-base-4: #3d5a80;
-    --color-base-5: #293241;
+    --color-base-1: #dcd7ba;
+    --color-base-2: #7aa89f;
+    --color-base-3: #1d1c19;
+    --color-base-4: #12120f;
+    --color-base-5: #0d0c0c;
     --font-mono: 'Fira Code', monospace;
 }
 
@@ -23,7 +23,7 @@
     }
 
     h1 {
-        @apply text-base-1 w-full text-center text-4xl font-bold;
+        @apply text-base-2 w-full text-center text-4xl font-bold;
     }
 
     .system {
