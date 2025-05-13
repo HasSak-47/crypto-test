@@ -11,6 +11,50 @@ function decryptCaesar(key: number, data: string): string {
   return encryptCaesar(-key, data)
 }
 
+function encryptVigenere(key: string, data: string): string {
+  key = force_alpha(key).toLowerCase()
+  if (key.length === 0) return data
+
+  let result = ''
+  let keyIndex = 0
+
+  for (const char of data) {
+    const lower = char.toLowerCase()
+    if (lower < 'a' || lower > 'z') {
+      result += char
+      continue
+    }
+
+    const shift = key.charCodeAt(keyIndex % key.length) - 'a'.charCodeAt(0)
+    result += shiftChar(char, shift)
+    keyIndex++
+  }
+
+  return result
+}
+
+function decryptVigenere(key: string, data: string): string {
+  key = force_alpha(key).toLowerCase()
+  if (key.length === 0) return data
+
+  let result = ''
+  let keyIndex = 0
+
+  for (const char of data) {
+    const lower = char.toLowerCase()
+    if (lower < 'a' || lower > 'z') {
+      result += char
+      continue
+    }
+
+    const shift = -(key.charCodeAt(keyIndex % key.length) - 'a'.charCodeAt(0))
+    result += shiftChar(char, shift)
+    keyIndex++
+  }
+
+  return result
+}
+
 function mod(n: number, m: number): number {
   return ((n % m) + m) % m
 }
@@ -129,6 +173,24 @@ export default function App() {
         validate_data={forceChar}
         encrypt={decryptCaesar}
         default_key={0}
+        default_data={''}
+      />
+
+      <Encryptor<string, string>
+        title='Encripcion Vigenere'
+        validate_key={forceChar}
+        validate_data={forceChar}
+        encrypt={encryptVigenere}
+        default_key={''}
+        default_data={''}
+      />
+
+      <Encryptor<string, string>
+        title='Desencripcion Vigenere'
+        validate_key={forceChar}
+        validate_data={forceChar}
+        encrypt={decryptVigenere}
+        default_key={''}
         default_data={''}
       />
     </div>
