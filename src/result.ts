@@ -23,6 +23,9 @@ export class Result<T, E = Error> {
 		return new Result<T, E>({ data: null, error: value })
 	}
 
+	is_err() {
+		return this.inner.error !== null
+	}
 	unwrap() {
 		if (this.inner.error !== null) {
 			throw this.inner.error
@@ -32,12 +35,13 @@ export class Result<T, E = Error> {
 	}
 }
 
-export function try_catch<T, F extends (...params: any[]) => T, E = Error>(
-	f: F,
-	...args: Parameters<F>
-): Result<T, E> {
+export async function try_catch<
+	T,
+	F extends (...params: any[]) => Promise<T>,
+	E = Error,
+>(f: F, ...args: Parameters<F>): Promise<Result<T, E>> {
 	try {
-		return Result.ok(f(...args))
+		return Result.ok(await f(...args))
 	} catch (error) {
 		return Result.err(error as E)
 	}
