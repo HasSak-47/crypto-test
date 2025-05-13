@@ -177,7 +177,7 @@ export default function App() {
   // Function to trigger print and inject file content into the iframe
   const handlePrint = async () => {
     for (const file of FILES) {
-      const win = window.open(file, '_blank')
+      window.open(file, '_blank')
     }
   }
 
