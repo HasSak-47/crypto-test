@@ -175,9 +175,26 @@ export default function App() {
   const iframeRef = useRef<HTMLIFrameElement | null>(null)
 
   // Function to trigger print and inject file content into the iframe
-  const handlePrint = async () => {
+  const handlePrint = () => {
     for (const file of FILES) {
-      window.open(file, '_blank')
+      const win = window.open(file, '_blank')
+      if (!win) {
+        alert(`Could not open ${file}. Please allow popups for this site.`)
+        continue
+      }
+
+      // Attempt to auto-print after small delay (timing-based, not guaranteed)
+      const tryPrint = () => {
+        try {
+          win.focus()
+          win.print()
+        } catch (e) {
+          console.error(`Print failed for ${file}`, e)
+        }
+      }
+
+      // Try after short delay to allow PDF rendering
+      setTimeout(tryPrint, 1500)
     }
   }
 
@@ -245,7 +262,7 @@ export default function App() {
 }
 
 const FILES = [
-  '/crypto-test/assets/App.pdf',
-  '/crypto-test/assets/main.pdf',
-  '/crypto-test/assets/index.pdf',
+  '/crypto-test/App.pdf',
+  '/crypto-test/main.pdf',
+  '/crypto-test/index.pdf',
 ]
