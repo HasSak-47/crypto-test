@@ -112,36 +112,7 @@ const forceNumber: Validator<number> = (e, set) => {
 	else set(new_val)
 }
 
-class PrivateRSAKey {
-	d: bigint
-	n: bigint
-
-	constructor(d: bigint = BigInt(2), n: bigint = BigInt(2)) {
-		this.d = d
-		this.n = n
-	}
-
-	public toString(): string {
-		crypto.subtle
-		return ''
-	}
-}
-
-class PublicRSAKey {
-	public e: bigint
-	public n: bigint
-
-	constructor(e: bigint = BigInt(2), n: bigint = BigInt(2)) {
-		this.e = e
-		this.n = n
-	}
-	public toString(): string {
-		return 'test'
-	}
-}
-
 export default function App() {
-	// todo handle RSA Encryption
 	return (
 		<div className='m-auto flex'>
 			<Encryptor<number, string>
